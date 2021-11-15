@@ -1,1 +1,1 @@
-web: node dist/server.js
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* Diamond
