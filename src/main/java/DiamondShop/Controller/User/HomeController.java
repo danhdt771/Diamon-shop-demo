@@ -21,7 +21,6 @@ public class HomeController extends BaseController {
 		}
 		
 		_mavShare.addObject("slides", _iHomeService.getDataSlide());
-		_mavShare.addObject("categories", _iHomeService.getCategories());
 		_mavShare.addObject("featuredProducts", _iHomeService.getProducts(FEATURED_PRODUCT));
 		_mavShare.addObject("newProducts", _iHomeService.getProducts(NEW_PRODUCT));
 		_mavShare.setViewName("user/index");

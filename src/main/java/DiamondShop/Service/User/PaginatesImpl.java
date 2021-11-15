@@ -19,7 +19,7 @@ public class PaginatesImpl implements IPaginateService {
 	}
 	
 	private int findFirstProductInPage(int currentPage, int limit) {
-		return (currentPage - 1) * limit + 1;
+		return (currentPage - 1) * limit;
 	}
 	
 	private int setInfoTotalPages(int totalData, int limit) {

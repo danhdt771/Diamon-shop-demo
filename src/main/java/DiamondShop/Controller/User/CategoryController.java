@@ -25,7 +25,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value= {"/products/{id}"}, method=RequestMethod.GET)
 	public ModelAndView product(@PathVariable String id) {
 		_mavShare.setViewName("user/products/category");
-		int totalData = categoryService.getAllProductById(Integer.parseInt(id)).size();
+		int totalData = categoryService.getAllProductByCategoryId(Integer.parseInt(id)).size();
 		PaginatesDto paginateInfo = paginateService.getInfoPaginates(1, totalProductsPage, totalData);
 		_mavShare.addObject("idCategory", id);
 		_mavShare.addObject("paginateInfo", paginateInfo);
@@ -37,7 +37,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value= {"/products/{id}/{currentPage}"}, method=RequestMethod.GET)
 	public ModelAndView product(@PathVariable String id, @PathVariable int currentPage) {
 		_mavShare.setViewName("user/products/category");
-		int totalData = categoryService.getAllProductById(Integer.parseInt(id)).size();
+		int totalData = categoryService.getAllProductByCategoryId(Integer.parseInt(id)).size();
 		PaginatesDto paginateInfo = paginateService.getInfoPaginates(currentPage, totalProductsPage, totalData);
 		_mavShare.addObject("idCategory", id);
 		_mavShare.addObject("paginateInfo", paginateInfo);

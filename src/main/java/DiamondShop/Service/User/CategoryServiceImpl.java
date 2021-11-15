@@ -15,8 +15,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	private ProductsDAO _productsDAO;
 	
 	@Override
-	public List<ProductsDto> getAllProductById(int id) {
-		return _productsDAO.getDataProductsById(id);
+	public List<ProductsDto> getAllProductByCategoryId(int id) {
+		return _productsDAO.getDataProductsByCategoryId(id);
 	}
 
 	@Override

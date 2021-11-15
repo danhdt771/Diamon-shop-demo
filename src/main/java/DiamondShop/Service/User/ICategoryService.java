@@ -9,6 +9,6 @@ import DiamondShop.Dto.ProductsDto;
 @Service
 public interface ICategoryService {
 
-	public List<ProductsDto> getAllProductById(int id);
+	public List<ProductsDto> getAllProductByCategoryId(int id);
 	public List<ProductsDto> getProductPaginate(int id, int firstProduct, int limit);
 }

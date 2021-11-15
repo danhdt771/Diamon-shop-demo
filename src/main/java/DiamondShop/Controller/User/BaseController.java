@@ -20,6 +20,7 @@ public class BaseController {
 	public ModelAndView init() {
 		_mavShare.addObject("menus",_iHomeService.getMenus());
 		_mavShare.addObject("user", new Account());
+		_mavShare.addObject("categories", _iHomeService.getCategories());
 		return _mavShare;
 	}
 }
