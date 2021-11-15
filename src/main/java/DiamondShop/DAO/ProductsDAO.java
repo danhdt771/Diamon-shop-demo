@@ -17,19 +17,19 @@ public class ProductsDAO extends BaseDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ");
 		sql.append("p.id, ");
-		sql.append("p.id_categories as id_categories, ");
-		sql.append("p.sizes as sizes, ");
-		sql.append("p.product_name as product_name, ");
-		sql.append("p.sale as sale, ");
-		sql.append("p.title as title, ");
-		sql.append("p.detail as detail, ");
-		sql.append("c.color_name as color_name, ");
-		sql.append("c.code as code_color, ");
-		sql.append("c.img as img, ");
-		sql.append("p.created_at as created_at, ");
-		sql.append("p.updated_at as updated_at, ");
-		sql.append("p.price as price, ");
-		sql.append("c.id as id_color, ");
+		sql.append("MIN(p.id_categories) as id_categories, ");
+		sql.append("MIN(p.sizes) as sizes, ");
+		sql.append("MIN(p.product_name) as product_name, ");
+		sql.append("MIN(p.sale) as sale, ");
+		sql.append("MIN(p.title) as title, ");
+		sql.append("MIN(p.detail) as detail, ");
+		sql.append("MIN(c.color_name) as color_name, ");
+		sql.append("MIN(c.code) as code_color, ");
+		sql.append("MIN(c.img) as img, ");
+		sql.append("MIN(p.created_at) as created_at, ");
+		sql.append("MIN(p.updated_at) as updated_at, ");
+		sql.append("MIN(p.price) as price, ");
+		sql.append("MIN(c.id) as id_color, ");
 		sql.append("p.FEATURED_PRODUCT, ");
 		sql.append("p.NEW_PRODUCT ");
 		sql.append("FROM products AS p ");
@@ -49,12 +49,17 @@ public class ProductsDAO extends BaseDAO {
 			sql.append("AND p.NEW_PRODUCT = 1 ");
 		}
 		sql.append("GROUP BY ");
-		sql.append("p.id ");
+		sql.append("p.id , ");
+		sql.append("p.FEATURED_PRODUCT, ");
+		sql.append("p.NEW_PRODUCT ");
+		sql.append("ORDER BY p.ID ");
 		if (typeProduct == FEATURED_PRODUCT) {
-			sql.append("LIMIT 9;");
+			sql.append("OFFSET 0 ROWS ");
+			sql.append("FETCH NEXT 9 ROWS ONLY ");
 		}
 		if (typeProduct == NEW_PRODUCT) {
-			sql.append("LIMIT 12;");
+			sql.append("OFFSET 0 ROWS ");
+			sql.append("FETCH NEXT 12 ROWS ONLY ");
 		}
 		return sql.toString();
 	}
@@ -64,10 +69,14 @@ public class ProductsDAO extends BaseDAO {
 		sql.append("WHERE 1 = 1 ");
 		sql.append("AND p.id_categories = " + id + " ");
 		sql.append("GROUP BY ");
-		sql.append("p.id ");
+		sql.append("p.id , ");
+		sql.append("p.FEATURED_PRODUCT, ");
+		sql.append("p.NEW_PRODUCT ");
 
 		if(limit != 0) {
-			sql.append("LIMIT " + firstProduct +","+limit + ";");
+			sql.append("ORDER BY p.ID asc ");
+			sql.append("OFFSET " + (firstProduct-1) + " ROWS ");
+			sql.append("FETCH NEXT " + limit + " ROWS ONLY ");
 		}
 		
 		return sql.toString();
@@ -78,7 +87,9 @@ public class ProductsDAO extends BaseDAO {
 		sql.append("WHERE 1 = 1 ");
 		sql.append("AND p.ID = " + id + " ");
 		sql.append("GROUP BY ");
-		sql.append("p.id ");
+		sql.append("p.id , ");
+		sql.append("p.FEATURED_PRODUCT, ");
+		sql.append("p.NEW_PRODUCT ");
 		
 		return sql.toString();
 	}
