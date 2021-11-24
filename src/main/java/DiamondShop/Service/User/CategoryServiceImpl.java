@@ -16,12 +16,12 @@ public class CategoryServiceImpl implements ICategoryService {
 	
 	@Override
 	public List<ProductsDto> getAllProductByCategoryId(int id) {
-		return _productsDAO.getDataProductsByCategoryId(id);
+		return _productsDAO.getProductsDtoByCategoryId(id);
 	}
 
 	@Override
 	public List<ProductsDto> getProductPaginate(int id, int firstProduct, int limit) {
-		return _productsDAO.getDataProductsPaginate(id, firstProduct, limit);
+		return _productsDAO.getProductsDtoPaginate(id, firstProduct, limit);
 	}
 
 }

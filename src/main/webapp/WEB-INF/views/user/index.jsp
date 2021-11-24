@@ -179,7 +179,7 @@ New Products
 								<div class="thumbnail">
 									<a class="zoomTool" href="<c:url value='/product-details/${product.id}'/>"
 										title="add to cart"><span class="icon-search"></span> QUICK
-										VIEW</a> <a href="product_details.html"><img
+										VIEW</a> <a href="<c:url value='/product-details/${product.id}'/>""><img
 										src="<c:url value="assets/user/img/${product.img}" />" alt=""></a>
 									<div class="caption">
 										<h5>${product.product_name}</h5>

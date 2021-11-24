@@ -6,20 +6,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import DiamondShop.DAO.CartDAO;
 import DiamondShop.Dto.CartDto;
-import DiamondShop.Entity.Bills;
 import DiamondShop.Entity.Account;
+import DiamondShop.Entity.Bills;
+import DiamondShop.Service.User.IAccountService;
 import DiamondShop.Service.User.ICartService;
 import DiamondShop.Service.User.ICheckoutService;
 
@@ -32,6 +30,9 @@ public class CartController extends BaseController {
 	@Autowired
 	private ICheckoutService _iCheckoutService;
 	
+	@Autowired
+	private IAccountService _iUserService;
+	
 	@RequestMapping(value= {"shopping-cart"})
 	public ModelAndView index() {
 		_mavShare.setViewName("user/cart/list_cart");
@@ -42,11 +43,13 @@ public class CartController extends BaseController {
 	public ModelAndView indexCheckOut(HttpSession session) {
 		_mavShare.setViewName("user/cart/checkout");
 		Bills bill = new Bills();
-		Account loginInfo = (Account) session.getAttribute("LoginInfo");
-		if (loginInfo != null) {
-			bill.setUser_name(loginInfo.getUserName());
-			bill.setDisplay_name(loginInfo.getDisplayName());
-			bill.setAddress(loginInfo.getAddress());
+		String userName = (String) session.getAttribute("customerName_");
+		Account customer = _iUserService.findByUserName(userName);
+		
+		if (customer != null) {
+			bill.setUser_name(customer.getUserName());
+			bill.setDisplay_name(customer.getDisplayName());
+			bill.setAddress(customer.getAddress());
 		}
 		_mavShare.addObject("Bill", bill);
 		return _mavShare;

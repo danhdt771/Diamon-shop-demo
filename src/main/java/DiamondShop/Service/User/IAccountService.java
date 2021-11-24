@@ -7,5 +7,6 @@ import DiamondShop.Entity.Account;
 @Service
 public interface IAccountService {
 	public int addAcc(Account user);
-	public Account checkAcc(Account user);
+	public int checkUserExists(String userName);
+	public Account findByUserName(String userName);
 }

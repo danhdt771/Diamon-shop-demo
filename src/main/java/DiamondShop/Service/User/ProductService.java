@@ -16,14 +16,14 @@ public class ProductService implements IProductService {
 	
 	@Override
 	public ProductsDto getProductById(int id) {
-		ProductsDto product = _productsDAO.findProductById(id);
+		ProductsDto product = _productsDAO.findProductDtoById(id);
 		return product;
 	}
 
 	@Override
 	public List<ProductsDto> getRelatedProduct(int idCategory, int limit) {
 		//Get product from id = 1, limit 5
-		return _productsDAO.getDataProductsPaginate(idCategory, 1, limit);
+		return _productsDAO.getProductsDtoPaginate(idCategory, 1, limit);
 	}
 
 }

@@ -1,7 +1,6 @@
 package DiamondShop.Controller.User;
 
-import java.security.Principal;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,7 @@ public class HomeController extends BaseController {
 	public static final String NEW_PRODUCT = "NEW_PRODUCT";
 
 	@RequestMapping(value = { "/", "home-page" }, method = RequestMethod.GET)
-	public ModelAndView index(Principal principal, HttpSession session) {
-		if(principal != null) {
-			session.setAttribute("userName", principal.getName());
-		}
+	public ModelAndView index(HttpServletRequest request, HttpSession session) {
 		
 		_mavShare.addObject("slides", _iHomeService.getDataSlide());
 		_mavShare.addObject("featuredProducts", _iHomeService.getProducts(FEATURED_PRODUCT));
@@ -27,8 +23,8 @@ public class HomeController extends BaseController {
 		return _mavShare;
 	}
 
-//	@RequestMapping("/403")
-//	public String accessDenied() {
-//		return "/403";
-//	}
+	@RequestMapping("/403")
+	public String accessDenied() {
+		return "/user/error/403";
+	}
 }

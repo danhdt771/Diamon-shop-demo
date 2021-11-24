@@ -37,14 +37,14 @@
 					<a class="active" href="<c:url value="/index" />"> <span class="icon-home"></span>
 						Home
 					</a> 
-					<c:if test="${empty userName}">
+					<c:if test="${empty customerName_}">
 						<a href="<c:url value="/register" />">
 						<span class="icon-edit"></span> Free
 						Register 
 					</a> 
 					</c:if>
-					<c:if test="${not empty userName}">
-						<a href="#"><span class="icon-user"></span> ${userName}</a> 
+					<c:if test="${not empty customerName_}">
+						<a href="<c:url value="/customer/account" />"><span class="icon-user"></span> ${customerName_}</a> 
 						<a href="<c:url value="/logout" />">
 							<span class="icon-edit"></span> Logout
 						</a> 

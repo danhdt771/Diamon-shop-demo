@@ -9,29 +9,24 @@ import DiamondShop.Entity.Account;
 
 @Service
 public class AccountService implements IAccountService {
-	
+
 	@Autowired
 	private AccountDAO _userDAO;
 
 	@Override
 	public int addAcc(Account user) {
 		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+		user.setUserRole("ROLE_USER");
 		return _userDAO.addAccount(user);
 	}
 
 	@Override
-	public Account checkAcc(Account user) {
-		String password = user.getPassword();
-		Account _user = _userDAO.findUserByUserName(user.getUserName());
-		
-		if(_user != null) {
-			if (BCrypt.checkpw(password, _user.getPassword())) {
-				return _user;
-			} else {
-				return null;
-			}
-		}
-		return null;
+	public int checkUserExists(String userName) {
+		return _userDAO.checkUserExistsByUserName(userName);
 	}
-
+	
+	@Override
+	public Account findByUserName(String userName) {
+		return _userDAO.findUserByUserName(userName);
+	}
 }

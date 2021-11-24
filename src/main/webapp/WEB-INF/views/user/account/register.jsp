@@ -74,6 +74,7 @@ Body Section
 				<div class="span4">
 					<div class="well">
 						<h5>CREATE YOUR ACCOUNT</h5>
+						<div id="error" style="color: red">${email_exists}</div><br>
 						<h4 style="color:red">${statusRegister}</h4>
 						<br />
 						<form:form action="register" modelAttribute="user" method="POST">  
@@ -116,7 +117,9 @@ Body Section
 				<div class="span4">
 					<div class="well">
 						<h5>ALREADY REGISTERED ?</h5>
-						<h4 style="color:red">${statusLogin}</h4>
+						<c:if test="${not empty error}">
+                        	<p id="error" style="color: red"> ${error} </p>
+                        </c:if>
 						<form:form action="login" modelAttribute="user" method="POST">  
 							<div class="control-group">
 								<label class="control-label" for="inputEmail">Email</label>

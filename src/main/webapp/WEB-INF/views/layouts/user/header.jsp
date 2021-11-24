@@ -63,33 +63,14 @@ Navigation Bar Section
 					</c:forEach> 
 				</ul>
 				<ul class="nav pull-right">
-					<c:if test="${not empty userName }">
-						<li class="dropdown"><a href="#"><span class="icon-user"></span>
-								${userName} <b class="caret"></b></a>
-						</li>
-					</c:if>
-					<c:if test="${empty userName }">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"><span class="icon-lock"></span>
-								Login <b class="caret"></b></a>
-							<div class="dropdown-menu">
-								<form:form class="form-horizontal loginFrm" action="perform_login" modelAttribute="user" method="POST"> 
-									<div class="control-group">
-										<form:input required="required"  id="inputEmail" class="span2" placeholder="Email" type="email" path="userName" />
-									</div>
-									<div class="control-group">
-										<form:input required="required" id="inputPassword" class="span2" placeholder="Password" type="password" path="password" />
-									</div>
-									<div class="control-group">
-										<label class="checkbox"> <input type="checkbox">
-											Remember me
-										</label>
-										<button type="submit" class="shopBtn btn-block">Sign
-											in</button>
-									</div>
-								</form:form>
-							</div>
-						</li>
+					<c:if test="${empty customerName_ }">
+						<li class="dropdown">
+						<!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#"> -->
+						<a href="<c:url value="/login" />">
+							<span class="icon-lock"></span>
+								Login <!-- <b class="caret"></b> -->
+						</a>
+						</li> 
 					</c:if>
 				</ul>
 			</div>

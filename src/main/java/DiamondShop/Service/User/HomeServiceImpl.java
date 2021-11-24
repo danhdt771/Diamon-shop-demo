@@ -26,7 +26,7 @@ public class HomeServiceImpl implements IHomeService {
 	@Autowired
 	private MenuDAO menuDAO;
 	
-	@Autowired
+	@Autowired 
 	private ProductsDAO productsDAO;
 	
 	@Override
@@ -41,12 +41,12 @@ public class HomeServiceImpl implements IHomeService {
 
 	@Override
 	public List<Menus> getMenus() {
-		return menuDAO.getMenus();
+		return menuDAO.listMenus();
 	}
 
 	@Override
 	public List<ProductsDto> getProducts(String typeProduct) {
-		List<ProductsDto> listProducts = productsDAO.getDataProducts(typeProduct);
+		List<ProductsDto> listProducts = productsDAO.getProductsDto(typeProduct);
 		return listProducts;
 	}
 
