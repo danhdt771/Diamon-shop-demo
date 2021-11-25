@@ -56,7 +56,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
  
     protected void handle(HttpServletRequest request, 
       HttpServletResponse response, Authentication authentication) throws IOException {
-        String targetUrl = determineTargetUrl(authentication);
+        String targetUrl = determineTargetUrl(authentication, request);
  
         if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
@@ -66,7 +66,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
  
-    protected String determineTargetUrl(Authentication authentication) {
+    protected String determineTargetUrl(Authentication authentication, HttpServletRequest request) {
     	
         boolean isUser = false;
         boolean isAdmin = false;
@@ -82,6 +82,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         }
  
         if (isUser) {
+        	//check if user redirect from shopping cart to login then after logged in redirect to /checkout
+        	if (((String) request.getSession().getAttribute("previousUrl")).contains("/shopping-cart")) {
+        		return "/checkout";
+			}
             return "/";
         } else if (isAdmin) {
             return "/admin";

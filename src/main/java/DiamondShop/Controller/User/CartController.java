@@ -66,7 +66,7 @@ public class CartController extends BaseController {
 		session.removeAttribute("Cart");
 		session.removeAttribute("TotalQtyCart");
 		session.removeAttribute("TotalPriceCart");
-		return "redirect:shopping-cart";
+		return "redirect:shopping-cart?status=success";
 	}
 	
 	@RequestMapping(value = {"addCartWithQty/{id}"})
@@ -77,9 +77,6 @@ public class CartController extends BaseController {
 			cart = new HashMap<Integer, CartDto>();
 		}
 		cart = _iCartService.addCart(id, cart, qty);
-//		session.setAttribute("Cart", cart);
-//		session.setAttribute("TotalQtyCart", _iCartService.totalQty(cart));
-//		session.setAttribute("TotalPriceCart", _iCartService.totalPrice(cart));
 		storeCartInSession(session, cart, _iCartService.totalQty(cart), _iCartService.totalPrice(cart));
 		return "redirect:"+request.getHeader("Referer");
 	}
@@ -92,9 +89,6 @@ public class CartController extends BaseController {
 		}
 		int qty = 1;
 		cart = _iCartService.addCart(id, cart, qty);
-//		session.setAttribute("Cart", cart);
-//		session.setAttribute("TotalQtyCart", _iCartService.totalQty(cart));
-//		session.setAttribute("TotalPriceCart", _iCartService.totalPrice(cart));
 		storeCartInSession(session, cart, _iCartService.totalQty(cart), _iCartService.totalPrice(cart));
 		return "redirect:"+request.getHeader("Referer");
 	}
@@ -106,9 +100,6 @@ public class CartController extends BaseController {
 			cart = new HashMap<Integer, CartDto>();
 		}
 		cart = _iCartService.editCart(id, qty, cart);
-//		session.setAttribute("Cart", cart);
-//		session.setAttribute("TotalQtyCart", _iCartService.totalQty(cart));
-//		session.setAttribute("TotalPriceCart", _iCartService.totalPrice(cart));
 		storeCartInSession(session, cart, _iCartService.totalQty(cart), _iCartService.totalPrice(cart));
 		return "redirect:"+request.getHeader("Referer");
 	}
@@ -120,9 +111,6 @@ public class CartController extends BaseController {
 			cart = new HashMap<Integer, CartDto>();
 		}
 		cart = _iCartService.deleteCart(id, cart);
-//		session.setAttribute("Cart", cart);
-//		session.setAttribute("TotalQtyCart", _iCartService.totalQty(cart));
-//		session.setAttribute("TotalPriceCart", _iCartService.totalPrice(cart));
 		storeCartInSession(session, cart, _iCartService.totalQty(cart), _iCartService.totalPrice(cart));
 		return "redirect:"+request.getHeader("Referer");
 	}

@@ -64,7 +64,6 @@
 										role="grid" aria-describedby="example1_info">
 										<thead class="thead">
 											<tr>
-												<th>Invoice ID</th>
 												<th>User Name</th>
 												<th>Phone</th>
 												<th>Display Name</th>
@@ -77,7 +76,6 @@
 											<c:if test="${!empty billPaginate}">
 												<c:forEach var="bill" items="${billPaginate}" varStatus="loop">
 													<tr>
-														<td>${bill.id}</td>
 														<td>${bill.user_name}</td>
 														<td>${bill.phone}</td>
 														<td>${bill.display_name}</td>

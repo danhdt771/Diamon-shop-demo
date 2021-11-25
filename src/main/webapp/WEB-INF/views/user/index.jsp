@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="taglib.jsp" %>
+<%@include file="taglib.jsp"%>
 <title>Home Page</title>
 <body>
 	<div class="row">
@@ -9,20 +9,19 @@
 				<ul class="nav nav-list">
 					<c:forEach var="category" items="${categories}">
 						<li><a href="<c:url value='/products/${category.id}'/>"><span
-							class="icon-chevron-right"></span>${category.name}</a></li>
+								class="icon-chevron-right"></span>${category.name}</a></li>
 					</c:forEach>
-					<li><a class="totalInCart" href="<c:url value="/shopping-cart"/>"><strong>Total
+					<li><a class="totalInCart"
+						href="<c:url value="/shopping-cart"/>"><strong>Total
 								Amount <c:if test="${TotalQtyCart > 0}">
-											<span class="badge badge-warning pull-right"
-													style="line-height: 18px;">$${TotalPriceCart}</span>
-											</strong></a>
-										</c:if>
-										<c:if test="${TotalQtyCart == 0 || TotalQtyCart == null}">
-											<span class="badge badge-warning pull-right"
-													style="line-height: 18px;">$0</span>
-											</strong></a>
-										</c:if>
-					</li>
+									<span class="badge badge-warning pull-right"
+										style="line-height: 18px;">$${TotalPriceCart}</span>
+						</strong></a> </c:if> <c:if test="${TotalQtyCart == 0 || TotalQtyCart == null}">
+							<span class="badge badge-warning pull-right"
+								style="line-height: 18px;">$0</span>
+							</strong>
+							</a>
+						</c:if></li>
 				</ul>
 			</div>
 
@@ -51,7 +50,8 @@
 							alt="bootstrap ecommerce templates">
 						<div class="caption">
 							<h4>
-								<a class="defaultBtn" href="<c:url value='/product-details/10'/>">VIEW</a> <span
+								<a class="defaultBtn"
+									href="<c:url value='/product-details/10'/>">VIEW</a> <span
 									class="pull-right">$22.00</span>
 							</h4>
 						</div>
@@ -67,7 +67,8 @@
 							alt="shopping cart template">
 						<div class="caption">
 							<h4>
-								<a class="defaultBtn" href="<c:url value='/product-details/11'/>">VIEW</a> <span
+								<a class="defaultBtn"
+									href="<c:url value='/product-details/11'/>">VIEW</a> <span
 									class="pull-right">$22.00</span>
 							</h4>
 						</div>
@@ -83,7 +84,8 @@
 							alt="bootstrap template">
 						<div class="caption">
 							<h4>
-								<a class="defaultBtn" href="<c:url value='/product-details/12'/>">VIEW</a> <span
+								<a class="defaultBtn"
+									href="<c:url value='/product-details/12'/>">VIEW</a> <span
 									class="pull-right">$22.00</span>
 							</h4>
 						</div>
@@ -96,7 +98,7 @@
 			<div class="well np">
 				<div id="myCarousel" class="carousel slide homCar">
 					<div class="carousel-inner">
-					
+
 						<c:forEach var="item" items="${slides}" varStatus="index">
 							<c:if test="${index.first}">
 								<div class="item active">
@@ -104,7 +106,7 @@
 							<c:if test="${not index.first}">
 								<div class="item">
 							</c:if>
-							
+
 							<img style="width: 100%"
 								src="<c:url value="assets/user/img/slides/${item.img}" />"
 								alt="bootstrap ecommerce templates">
@@ -114,96 +116,102 @@
 									<span>${item.content}</span>
 								</p>
 							</div>
-						</div>
-						</c:forEach>
-					
 					</div>
-					<a class="left carousel-control" href="#myCarousel"
-						data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
-						href="#myCarousel" data-slide="next">&rsaquo;</a>
+					</c:forEach>
+
 				</div>
+				<a class="left carousel-control" href="#myCarousel"
+					data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
+					href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div>
-			<!--
+		</div>
+		<!--
 New Products
 -->
-			<div class="well well-small">
-				<h3>New Products</h3>
-				<hr class="soften" />
-				<div class="row-fluid">
-					<div id="newProductCar" class="carousel slide">
-						<div class="carousel-inner">
-							<c:if test="${newProducts.size() > 0}">
-								<div class="item active">
+		<div class="well well-small">
+			<h3>New Products</h3>
+			<hr class="soften" />
+			<div class="row-fluid">
+				<div id="newProductCar" class="carousel slide">
+					<div class="carousel-inner">
+						<c:if test="${newProducts.size() > 0}">
+							<div class="item active">
+								<ul class="thumbnails">
+									<c:forEach var="product" items="${newProducts}"
+										varStatus="loop">
+										<li class="span3">
+											<div class="thumbnail">
+												<a class="zoomTool"
+													href="<c:url value='/product-details/${product.id}'/>"
+													title="add to cart"><span class="icon-search"></span>
+													QUICK VIEW</a> <a href="#" class="tag"></a> <a
+													href="<c:url value='/product-details/${product.id}'/>"><img
+													src="<c:url value="assets/user/img/${product.img}" />"
+													alt="bootstrap-ring"></a>
+											</div>
+										</li>
+										<c:if
+											test="${(loop.index+1) % 4 == 0 || (loop.index+1) == newProducts.size()}">
+								</ul>
+							</div>
+							<c:if test="${(loop.index+1) < newProducts.size()}">
+								<div class="item">
 									<ul class="thumbnails">
-								<c:forEach var="product" items="${newProducts}" varStatus="loop">
-									<li class="span3">
-										<div class="thumbnail">
-											<a class="zoomTool" href="<c:url value='/product-details/${product.id}'/>"
-												title="add to cart"><span class="icon-search"></span>
-												QUICK VIEW</a> <a href="#" class="tag"></a> <a
-												href="<c:url value='/product-details/${product.id}'/>"><img
-												src="<c:url value="assets/user/img/${product.img}" />"
-												alt="bootstrap-ring"></a>
-										</div>
-									</li>
-									<c:if test="${(loop.index+1) % 4 == 0 || (loop.index+1) == newProducts.size()}">
-											</ul>
-										</div>
-										<c:if test="${(loop.index+1) < newProducts.size()}">
-											<div class="item">
-												<ul class="thumbnails">
-										</c:if>
-									</c:if>
-								</c:forEach>
 							</c:if>
-						</div>
-						<a class="left carousel-control" href="#newProductCar"
-							data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
-							href="#newProductCar" data-slide="next">&rsaquo;</a>
+						</c:if>
+						</c:forEach>
+						</c:if>
 					</div>
+					<a class="left carousel-control" href="#newProductCar"
+						data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
+						href="#newProductCar" data-slide="next">&rsaquo;</a>
 				</div>
 			</div>
-			<!--
+		</div>
+		<!--
 	Featured Products
 	-->
-			<div class="well well-small">
-				<h3>
-					Featured Products
-				</h3>
-				<hr class="soften" />
-				<div class="row-fluid">
-					<c:if test="${featuredProducts.size() > 0}">
-						<ul class="thumbnails">
-						<c:forEach var="product" items="${featuredProducts}" varStatus="loop">
+		<div class="well well-small">
+			<h3>Featured Products</h3>
+			<hr class="soften" />
+			<div class="row-fluid">
+				<c:if test="${featuredProducts.size() > 0}">
+					<ul class="thumbnails">
+						<c:forEach var="product" items="${featuredProducts}"
+							varStatus="loop">
 							<li class="span4">
 								<div class="thumbnail">
-									<a class="zoomTool" href="<c:url value='/product-details/${product.id}'/>"
-										title="add to cart"><span class="icon-search"></span> QUICK
-										VIEW</a> <a href="<c:url value='/product-details/${product.id}'/>""><img
+									<a class="zoomTool"
+										href="<c:url value='/product-details/${product.id}'/>"
+										title="add to cart"><span class="icon-search"></span>
+										QUICK VIEW</a> <a
+										href="<c:url value='/product-details/${product.id}'/>""><img
 										src="<c:url value="assets/user/img/${product.img}" />" alt=""></a>
 									<div class="caption">
 										<h5>${product.product_name}</h5>
 										<h4>
-											<a class="defaultBtn" href="<c:url value='/product-details/${product.id}'/>"
+											<a class="defaultBtn"
+												href="<c:url value='/product-details/${product.id}'/>"
 												title="Click to view"><span class="icon-zoom-in"></span></a>
-											<a class="shopBtn" href="<c:url value="/addCart/${product.id}"/>" title="add to cart"><span
-												class="icon-plus"></span></a> 
-												<span class="pull-right">
-													<fmt:formatNumber value="${product.price}" type="currency" currencySymbol="$" />
-												</span>
+											<a class="shopBtn"
+												href="<c:url value="/addCart/${product.id}"/>"
+												title="add to cart"><span class="icon-plus"></span></a> <span
+												class="pull-right"> <fmt:formatNumber
+													value="${product.price}" type="currency" currencySymbol="$" />
+											</span>
 										</h4>
 									</div>
 								</div>
 							</li>
-							<c:if test="${(loop.index+1)%3 == 0 || (loop.index+1) == featuredProducts.size()}">
-								</ul>
-								<c:if test="${(loop.index+1) < featuredProducts.size()}">
-									<ul class="thumbnails">
-								</c:if>
-							</c:if>
-						</c:forEach>
+							<c:if
+								test="${(loop.index+1)%3 == 0 || (loop.index+1) == featuredProducts.size()}">
+					</ul>
+					<c:if test="${(loop.index+1) < featuredProducts.size()}">
+						<ul class="thumbnails">
 					</c:if>
-				</div>
+				</c:if>
+				</c:forEach>
+				</c:if>
 			</div>
 		</div>
 	</div>

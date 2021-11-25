@@ -86,7 +86,7 @@
 													</tr>
 												</c:forEach>
 											</c:if>
-											<c:if test="${empty cateogriesPaginate}">
+											<c:if test="${empty menuPaginate}">
 												<tr>
 													<td colspan="7">No data</td>
 												</tr>

@@ -18,8 +18,13 @@ public class AccountDAO extends BaseDAO {
 	private final String SQL_DELETE_ACCOUNT = "delete from users where id = ?";
 	private final String SQL_UPDATE_ACCOUNT = "update users "
 			+ "set user_name = ?, password = ?, display_name = ?, user_role = ?, address = ? " + "where id = ?";
+	private final String SQL_UPDATE_MYACCOUNT = "update users "
+			+ "set display_name = ?, address = ? " + "where user_name = ?";
 	private final String SQL_INSERT_ACCOUNT = "insert into users" + "(user_name, password,display_name,user_role,address) "
 			+ "values(?,?,?,?,?)";
+	
+	private final String SQL_RESET_PASSWORD = "update users "
+			+ "set password = ? " + "where user_name = ?";
 
 	public int addAccount(Account user) {
 		StringBuffer sql = new StringBuffer();
@@ -103,5 +108,18 @@ public class AccountDAO extends BaseDAO {
 	
 	public Integer checkUserExistsByUserName(String userName) {
 		return _jdbcTemplate.queryForObject(SQL_CHECK_EXISTS_ACCOUNT_BY_USERNAME, Integer.class, userName);
+	}
+	
+	public boolean updateMyAccount(Account account) {
+		return _jdbcTemplate.update(SQL_UPDATE_MYACCOUNT, 
+				account.getDisplayName(), 
+				account.getAddress(), 
+				account.getUserName()) > 0;
+	}
+	
+	public boolean resetPassword(Account account) {
+		return _jdbcTemplate.update(SQL_RESET_PASSWORD, 
+				account.getPassword(), 
+				account.getUserName()) > 0;
 	}
 }

@@ -71,6 +71,7 @@ public class UserController extends BaseController {
 		int result = _iUserService.addAcc(user);
 		if(result > 0) {
 			_mavShare.addObject("title", "Register Successful!");
+			_mavShare.addObject("targetUrl", "/customer/account");
 		}
 		Account customer = _iUserService.findByUserName(user.getUserName());
         
@@ -97,6 +98,7 @@ public class UserController extends BaseController {
 			HttpServletRequest request) {
 		_mavShare.addObject("error", null); 
 		HttpSession session = request.getSession();
+		session.setAttribute("previousUrl", request.getHeader("Referer"));
 		// if user already login, then redirect to home page.
 		if(session.getAttribute("customerName_") != null){
 			_mavShare.setViewName("redirect:/");

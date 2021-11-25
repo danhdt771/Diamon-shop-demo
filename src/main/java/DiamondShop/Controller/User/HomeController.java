@@ -24,7 +24,8 @@ public class HomeController extends BaseController {
 	}
 
 	@RequestMapping("/403")
-	public String accessDenied() {
-		return "/user/error/403";
+	public ModelAndView accessDenied() {
+		_mavShare.setViewName("/user/error/403");
+		return _mavShare;
 	}
 }

@@ -22,6 +22,7 @@ public class BillDAO extends BaseDAO {
 	private final String SQL_INSERT_BILL = "insert into bills" 
 			+ "(USER_NAME, PHONE, DISPLAY_NAME, ADDRESS, TOTAL, TOTAL_QTY, NOTE) "
 			+ "values(?,?,?,?,?,?,?)";
+	private final String SQL_GET_BILL_BY_USERNAME = "select * from bills where user_name = ?";
 
 	public int addBill(Bills bill) {
 		StringBuffer sql = new StringBuffer();
@@ -86,6 +87,18 @@ public class BillDAO extends BaseDAO {
 
 		return sql.toString();
 	}
+	
+	// GET BILL WITH PAGINATION BY USERNAME
+	private String sqlBillPaginationByUserName(int firstBill, int limit, String userName) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SQL_GET_ALL_BILL);
+		sql.append("WHERE user_name = '"+userName+"' ");
+		sql.append("ORDER BY id asc ");
+		sql.append("OFFSET " + (firstBill - 1) + " ROWS ");
+		sql.append("FETCH NEXT " + limit + " ROWS ONLY ");
+
+		return sql.toString();
+	}
 
 	// GET ALL BILL.
 	public List<Bills> listBill() {
@@ -95,6 +108,12 @@ public class BillDAO extends BaseDAO {
 	// GET BILL WITH PAGINATION.
 	public List<Bills> getBillPagination(int firstBill, int limit) {
 		String sql = sqlBillPagination(firstBill, limit);
+		return _jdbcTemplate.query(sql, new MapperBills());
+	}
+	
+	// GET BILL WITH PAGINATION BY USERNAME.
+	public List<Bills> getBillPaginationByUserName(int firstBill, int limit, String userName) {
+		String sql = sqlBillPaginationByUserName(firstBill, limit, userName);
 		return _jdbcTemplate.query(sql, new MapperBills());
 	}
 
@@ -131,5 +150,9 @@ public class BillDAO extends BaseDAO {
 
 	public Integer checkBillExists(int id) {
 		return _jdbcTemplate.queryForObject(SQL_CHECK_EXISTS_BILL, Integer.class, id);
+	}
+	
+	public List<Bills> getBillByUserName(String userName) {
+		return _jdbcTemplate.query(SQL_GET_BILL_BY_USERNAME, new MapperBills(), userName);
 	}
 }

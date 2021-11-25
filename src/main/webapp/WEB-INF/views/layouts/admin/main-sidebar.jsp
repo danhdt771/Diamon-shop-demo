@@ -42,7 +42,7 @@
                 <li><a href="<c:url value="/admin/category/list" />"><i class="fa fa-circle-o"></i> Category</a></li>
                 <li><a href="<c:url value="/admin/menu/list" />"><i class="fa fa-circle-o"></i> Menu</a></li>
                 <li><a href="<c:url value="/admin/user/list" />"><i class="fa fa-circle-o"></i> User</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i> Logout</a></li>
+                <li><a href="<c:url value="/logout" />"><i class="fa fa-circle-o"></i> Logout</a></li>
             </ul>
         </li>
     </ul>

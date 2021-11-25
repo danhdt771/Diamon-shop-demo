@@ -8,10 +8,10 @@
 </head>
 <body class="hold-transition login-page">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-5 col-md-offset-3">
-				<div class="span-12">
-					<div class="well well-small">
+		<div class="well well-small">
+			<div class="row-fluid">
+				<div class="col-md-5 col-md-offset-3">
+					<div class="span-12">
 						<div class="panel-body" style="text-align: center">
 							<h1>You do not have permission to access this page!</h1>
 							<p>

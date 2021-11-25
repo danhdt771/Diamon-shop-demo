@@ -38,7 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// Setting Service to find User in the database.
 		// And Setting PassswordEncoder
-//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
 		auth.jdbcAuthentication().dataSource(dataSource)
     	.usersByUsernameQuery("SELECT user_name, passwordd FROM customer WHERE user_name = ?")

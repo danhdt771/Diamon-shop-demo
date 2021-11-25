@@ -16,6 +16,7 @@ Body Section
 				<li class="active">Shopping Cart</li>
 			</ul>
 			<div class="well well-small">
+				<c:if test="${param.status eq null}">
 				<h1>
 					Shopping Cart <small class="pull-right"> ${TotalQtyCart} Items are in the
 						cart </small>
@@ -45,7 +46,7 @@ Body Section
 								</td>
 								<td>$${item.value.product.price}</td>
 								<td>
-									<input type="number" min="0" max="100" class="span1" style="max-width: 34px"
+									<input type="number" min="1" max="100" class="span1" style="max-width: 34px"
 									placeholder="1" id="qty-item-${item.key}" value="${item.value.qty}">
 								</td>
 								<td>
@@ -72,11 +73,16 @@ Body Section
 					</tbody>
 				</table>
 				<br />
+				</c:if>
+				<c:if test="${param.status == 'success'}">
+					<h2 style="margin-bottom: 20px;">Your order has been successfully!</h2>
+				</c:if>
 				<a href="<c:url value="/" />" class="shopBtn btn-large"><span
-					class="icon-arrow-left"></span> Continue Shopping </a> <a
-					href="<c:url value="/checkout" />" class="shopBtn btn-large pull-right">Next <span
+					class="icon-arrow-left"></span> Continue Shopping </a> 
+				<c:if test="${param.status eq null}">
+				<a href="<c:url value="/checkout" />" class="shopBtn btn-large pull-right">Next <span
 					class="icon-arrow-right"></span></a>
-
+				</c:if>
 			</div>
 		</div>
 	</div>
