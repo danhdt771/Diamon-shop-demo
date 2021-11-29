@@ -83,8 +83,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
  
         if (isUser) {
         	//check if user redirect from shopping cart to login then after logged in redirect to /checkout
-        	if (((String) request.getSession().getAttribute("previousUrl")).contains("/shopping-cart")) {
-        		return "/checkout";
+        	if (request.getSession().getAttribute("previousUrl") != null) {
+        		return (String) request.getSession().getAttribute("previousUrl");
 			}
             return "/";
         } else if (isAdmin) {
