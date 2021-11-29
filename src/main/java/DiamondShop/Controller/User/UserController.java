@@ -98,7 +98,8 @@ public class UserController extends BaseController {
 			HttpServletRequest request) {
 		_mavShare.addObject("error", null); 
 		HttpSession session = request.getSession();
-		if (((String) request.getHeader("Referer")).contains("/shopping-cart")) {
+		if (((String) request.getHeader("Referer")).contains("/shopping-cart")
+				&& request.getHeader("Referer") != null) {
 			session.setAttribute("previousUrl", "/checkout");
 		}
 		// if user already login, then redirect to home page.
